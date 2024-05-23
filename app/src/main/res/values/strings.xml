@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">AutoID</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="register">Crear Cuenta</string>
+    <string name="login_user">"Usuario o email"</string>
+    <string name="login_pass">"Contraseña"</string>
+    <string name="iniciar_sesion">"Iniciar Sesion"</string>
+
+    //Elementos del menu
+    <string name="menu_camera">Capturar Placa</string>
+    <string name="menu_registros">Registros</string>
+    <string name="menu_reportes">Reportes</string>
+    <string name="perfil">Perfil</string>
+    <string name="menu_cerrarsesion">Cerrar Sesion</string>
+</resources>

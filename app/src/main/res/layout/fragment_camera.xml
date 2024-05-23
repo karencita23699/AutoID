@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradiente"
+    android:orientation="vertical"
+    tools:context=".CameraFragment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.camera.view.PreviewView
+                android:id="@+id/previewViewCamera"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/btnPrediccion"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></androidx.camera.view.PreviewView>
+
+            <LinearLayout
+                android:id="@+id/LayoutZoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:background="@color/transparent"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@id/previewViewCamera"
+                app:layout_constraintEnd_toEndOf="@id/previewViewCamera">
+
+                <ImageView
+                    android:id="@+id/imgZoommas"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@color/transparent"
+                    android:src="@drawable/ic_zoommas"
+                    app:tint="@color/boton_primario" />
+
+                <ImageView
+                    android:id="@+id/imgZoommenos"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@color/transparent"
+                    android:src="@drawable/ic_zoommenos"
+                    app:tint="@color/boton_primario" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/viewprueba"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/previewViewCamera"
+                app:layout_constraintEnd_toEndOf="@id/previewViewCamera"
+                app:layout_constraintStart_toStartOf="@id/previewViewCamera"
+                app:layout_constraintTop_toTopOf="@id/previewViewCamera"></ImageView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnPrediccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Capturar Datos"
+                app:layout_constraintBottom_toTopOf="@id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/previewViewCamera"></androidx.appcompat.widget.AppCompatButton>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@id/etPlaca1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnPrediccion">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnCorrecto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Registrar"></androidx.appcompat.widget.AppCompatButton>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnIncorrecto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Reportar"></androidx.appcompat.widget.AppCompatButton>
+            </LinearLayout>
+            <EditText
+                android:id="@+id/etPlaca1"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/edittext"
+                android:clickable="false"
+                android:focusable="false"
+                android:fontFamily="@font/livvic_medium"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text=""
+                android:textAllCaps="true"
+                android:textColor="@color/texto_secundario"
+                android:textSize="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout"
+                app:layout_constraintBottom_toBottomOf="parent"></EditText>
+
+            <ImageView
+                android:id="@+id/imgInfo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_info"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/etPlaca1"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout"
+                app:tint="@color/boton_primario"></ImageView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/livvic_bold"
+                    android:gravity="center"
+                    android:text="Informacion de las Predicciones"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/boton_secundario"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/livvic_bold"
+                        android:gravity="center"
+                        android:text="DATO"></TextView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/livvic_bold"
+                        android:gravity="center"
+                        android:text="PROBABILIDAD"></TextView>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewPredicciones"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

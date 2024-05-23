@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/background_gradiente"
+    android:layout_height="match_parent"
+    tools:context=".EditarMiUsuarioFragment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tvNombreUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/livvic_bold"
+                android:gravity="center"
+                android:text="Mi Usuario"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></TextView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewFotoUser"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="50dp"
+                app:layout_constraintBottom_toTopOf="@id/tvCorreoElectronico"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvNombreUsuario">
+
+                <ImageView
+                    android:id="@+id/imgFotoPerfilUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/user"></ImageView>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvCorreoElectronico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/livvic_medium"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="@color/texto_sombreado"
+                app:layout_constraintBottom_toTopOf="@id/LinearLayoutSwActivo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardViewFotoUser"></TextView>
+
+
+            <LinearLayout
+                android:id="@+id/LinearLayoutSwActivo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                app:layout_constraintTop_toBottomOf="@id/tvCorreoElectronico">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/titleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/livvic_bold"
+                        android:text="Informacion Personal"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Primer Apellido"
+                                android:textColor="@color/texto_sombreado"
+                                android:textSize="12dp"></TextView>
+
+                            <TextView
+                                android:id="@+id/tvPrimerApellido"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="15dp"></TextView>
+
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:id="@+id/imgEditarPrimerApellido1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:src="@drawable/ic_editar"
+                            app:tint="@color/boton_primario"></ImageButton>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Segundo Apellido"
+                                android:textColor="@color/texto_sombreado"
+                                android:textSize="12dp"></TextView>
+
+                            <TextView
+                                android:id="@+id/tvSegundoApellido"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="15dp"></TextView>
+
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:id="@+id/imgEditarSegundoApellido1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:src="@drawable/ic_editar"
+                            app:tint="@color/boton_primario"></ImageButton>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nombres"
+                                android:textColor="@color/texto_sombreado"
+                                android:textSize="12dp"></TextView>
+
+                            <TextView
+                                android:id="@+id/tvNombres"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="15dp"></TextView>
+
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:id="@+id/imgEditarNombres1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:src="@drawable/ic_editar"
+                            app:tint="@color/boton_primario"></ImageButton>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Contacto"
+                                android:textColor="@color/texto_sombreado"
+                                android:textSize="12dp"></TextView>
+
+                            <TextView
+                                android:id="@+id/tvNumeroContacto"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="15dp"></TextView>
+
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:id="@+id/imgEditarContacto1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:src="@drawable/ic_editar"
+                            app:tint="@color/boton_primario"></ImageButton>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Genero"
+                                android:textColor="@color/texto_sombreado"
+                                android:textSize="12dp"></TextView>
+
+                            <TextView
+                                android:id="@+id/tvGenero"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="15dp"></TextView>
+
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:id="@+id/imgEditarGenero1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:src="@drawable/ic_editar"
+                            app:tint="@color/boton_primario"></ImageButton>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnCambiarContraseña"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button"
+                            android:padding="10dp"
+                            android:text="Cambiar Contraseña"
+                            android:textColor="@drawable/texto_button"></androidx.appcompat.widget.AppCompatButton>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

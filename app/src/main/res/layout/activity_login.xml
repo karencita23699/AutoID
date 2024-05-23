@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="30dp"
+    android:paddingTop="20dp"
+    android:paddingEnd="30dp"
+    android:paddingBottom="20dp"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/livvic_bold"
+        android:text="INICIAR SESION"
+        android:textColor="@color/texto_principal"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@id/etNomUsuario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="142dp" />
+
+    <EditText
+        android:id="@+id/etNomUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/edittext"
+        android:backgroundTintMode="multiply"
+        android:hint="@string/login_user"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:paddingStart="20dp"
+        android:textColor="@color/texto_secundario"
+        android:textColorHint="@color/texto_secundario"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@id/etPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView"></EditText>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/edittext"
+        android:hint="@string/login_pass"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:paddingStart="20dp"
+        android:textColor="@color/texto_secundario"
+        android:textColorHint="@color/texto_secundario"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@id/Layout1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etNomUsuario"></androidx.appcompat.widget.AppCompatEditText>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/Layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/btnSignIn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPassword">
+
+        <CheckBox
+            android:id="@+id/chRecordarme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recordarme"
+            android:textColor="@color/texto_secundario"></CheckBox>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="¿Olvidaste tu contraseña?"></TextView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:text="@string/iniciar_sesion"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/Layout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Layout1"></androidx.appcompat.widget.AppCompatButton>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/Layout2"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/Layout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSignIn">
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/Layout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Layout2">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿No tienes una cuenta?"></TextView>
+
+        <TextView
+            android:id="@+id/btnCreateAcount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  Crear nueva Cuenta"
+            android:textColor="@color/boton_primario"
+            android:textStyle="bold"></TextView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

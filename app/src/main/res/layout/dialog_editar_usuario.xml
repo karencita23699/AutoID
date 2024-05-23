@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:layout_gravity="bottom"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvEditarTitulo1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Escribe tu Apellido"
+            android:textColor="@color/texto_secundario"></TextView>
+
+        <EditText
+            android:id="@+id/etEntrada1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edittext"
+            android:importantForAutofill="no"
+            android:padding="2dp"
+            android:focusable="true"
+            android:textSize="15dp"></EditText>
+
+        <LinearLayout
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnCancelar1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:background="@drawable/button"
+                android:text="Cancelar"
+                android:textColor="@drawable/texto_button"
+                android:textSize="12dp"></androidx.appcompat.widget.AppCompatButton>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnGuardar1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/button"
+                android:padding="2dp"
+                android:text="Guardar"
+                android:textColor="@drawable/texto_button"
+                android:textSize="12dp"></androidx.appcompat.widget.AppCompatButton>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

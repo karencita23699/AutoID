@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradiente"
+    tools:context=".RegistrarActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:fontFamily="@font/livvic_bold"
+                android:text="@string/register"
+                android:textAllCaps="true"
+                android:textColor="@color/texto_principal"
+                android:textSize="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></TextView>
+
+            <ImageView
+                android:id="@+id/imgCuenta"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_account"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                app:tint="@color/texto_principal"></ImageView>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgCuenta">
+
+                <EditText
+                    android:id="@+id/etPrimerApellido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:autofillHints="name"
+                    android:background="@drawable/edittext"
+                    android:fontFamily="@font/livvic_medium"
+                    android:hint="Primer Apellido"
+                    android:inputType="textPersonName"
+                    android:nextFocusUp="@id/etSegundoApellido"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textColor="@color/texto_secundario"
+                    android:textColorHint="@color/texto_secundario"
+                    android:textSize="15dp"></EditText>
+
+                <EditText
+                    android:id="@+id/etSegundoApellido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:autofillHints="name"
+                    android:background="@drawable/edittext"
+                    android:fontFamily="@font/livvic_medium"
+                    android:hint="Segundo Apellido"
+                    android:inputType="textPersonName"
+                    android:nextFocusUp="@id/etNombres"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textColor="@color/texto_secundario"
+                    android:textColorHint="@color/texto_secundario"
+                    android:textSize="15dp"></EditText>
+
+                <EditText
+                    android:id="@+id/etNombres"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:autofillHints="name"
+                    android:background="@drawable/edittext"
+                    android:fontFamily="@font/livvic_medium"
+                    android:hint="Nombres"
+                    android:inputType="textPersonName"
+                    android:nextFocusUp="@id/etCorreo"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textColor="@color/texto_secundario"
+                    android:textColorHint="@color/texto_secundario"
+                    android:textSize="15dp"></EditText>
+
+                <EditText
+                    android:id="@+id/etCorreo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="emailAddress"
+                    android:background="@drawable/edittext"
+                    android:fontFamily="@font/livvic_medium"
+                    android:hint="Correo Electronico"
+                    android:inputType="textEmailAddress"
+                    android:nextFocusUp="@id/etTelefono"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textColor="@color/texto_secundario"
+                    android:textColorHint="@color/texto_secundario"
+                    android:textSize="15dp"></EditText>
+
+                <TextView
+                    android:id="@+id/tvCorreoNoDisponible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*Correo Electronico no disponible*"
+                    android:textColor="@color/boton_primario"
+                    android:textSize="11dp"
+                    android:visibility="gone"></TextView>
+
+                <EditText
+                    android:id="@+id/etTelefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:autofillHints="phone"
+                    android:background="@drawable/edittext"
+                    android:fontFamily="@font/livvic_medium"
+                    android:hint="Telefono"
+                    android:inputType="phone"
+                    android:nextFocusUp="@id/etNomUsuario"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textColor="@color/texto_secundario"
+                    android:textColorHint="@color/texto_secundario"
+                    android:textSize="15dp"></EditText>
+
+                <EditText
+                    android:id="@+id/etNomUsuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="username"
+                    android:background="@drawable/edittext"
+                    android:fontFamily="@font/livvic_medium"
+                    android:hint="Nombre de Usuario"
+                    android:inputType="text|textPersonName"
+                    android:nextFocusUp="@id/etContrasena1"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textColor="@color/texto_secundario"
+                    android:textColorHint="@color/texto_secundario"
+                    android:textSize="15dp"></EditText>
+
+                <TextView
+                    android:id="@+id/tvNombreUsuarioNoDisponible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="*Nombre de Usuario no disponible*"
+                    android:textColor="@color/boton_primario"
+                    android:textSize="11dp"
+                    android:visibility="gone"></TextView>
+
+                <EditText
+                    android:id="@+id/etContrasena1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:autofillHints="password"
+                    android:background="@drawable/edittext"
+                    android:fontFamily="@font/livvic_medium"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword"
+                    android:nextFocusUp="@id/etContrasena2"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textColor="@color/texto_secundario"
+                    android:textColorHint="@color/texto_secundario"
+                    android:textSize="15dp"></EditText>
+
+                <EditText
+                    android:id="@+id/etContrasena2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:autofillHints="password"
+                    android:background="@drawable/edittext"
+                    android:fontFamily="@font/livvic_medium"
+                    android:hint="Nuevamente la Contraseña"
+                    android:inputType="textPassword"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textColor="@color/texto_secundario"
+                    android:textColorHint="@color/texto_secundario"
+                    android:textSize="15dp"></EditText>
+
+                <RadioGroup
+                    android:id="@+id/rdGenero"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/etContrasena2">
+
+                    <RadioButton
+                        android:id="@+id/rbFem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:fontFamily="@font/livvic_medium"
+                        android:text="Femenino"
+                        android:textColor="@color/texto_secundario"></RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/rbMas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10sp"
+                        android:fontFamily="@font/livvic_medium"
+                        android:text="Masculino"
+                        android:textColor="@color/texto_secundario"></RadioButton>
+                </RadioGroup>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnRegistrar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:fontFamily="@font/livvic_bold"
+                    android:text="Registrar"
+                    android:textColor="@drawable/texto_button"
+                    android:textSize="18dp"></androidx.appcompat.widget.AppCompatButton>
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.AutoID" parent="Base.Theme.AutoID">
+        <item name="colorPrimary">@color/custom_purple</item>
+        <item name="colorPrimaryVariant">@color/custom_light_purple</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/custom_dark_blue</item>
+        <item name="colorSecondaryVariant">@color/custom_pink</item>
+        <item name="colorOnSecondary">@android:color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:textColor">@color/texto_secundario</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:buttonStyle">@style/BotonPrimario</item>
+        <item name="android:fontFamily">@font/livvic_medium</item>
+        <item name="android:importantForAutofill">no</item>
+    </style>
+</resources>
