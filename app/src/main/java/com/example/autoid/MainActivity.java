@@ -31,69 +31,79 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * La clase MainActivity maneja la interfaz principal de la aplicación.
+ * Implementa el menú de navegación y las funcionalidades asociadas a las acciones del usuario.
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    NavigationView navigationView;
-    NavController navController;
-    TextView tvnomuser;
-    DrawerLayout drawerLayout;
-    ImageView btnMenu, btnCamera;
-    View headerView;
-    int userId;
-    Menu navMenu;
-    private static final int REQUEST_CAMERA_PERMISSION = 8;
-    Usuario usuario;
+    NavigationView navigationView; // Vista de navegación
+    NavController navController; // Controlador de navegación
+    TextView tvnomuser; // Texto para mostrar el nombre del usuario
+    DrawerLayout drawerLayout; // Layout para el menú de navegación
+    ImageView btnMenu, btnCamera; // Botones para el menú y la cámara
+    View headerView; // Cabecera de la vista de navegación
+    int userId; // ID del usuario
+    Menu navMenu; // Menú de navegación
+    private static final int REQUEST_CAMERA_PERMISSION = 8; // Código de solicitud para el permiso de la cámara
+    Usuario usuario; // Usuario actual
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        inicializar();
+        inicializar(); // Inicializar componentes de la interfaz
+
         Intent intent = getIntent();
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
         }
+
         if (intent.hasExtra("idUsuario")) {
             userId = intent.getIntExtra("idUsuario", -1);
-            recuperarUsuario(userId);
+            recuperarUsuario(userId); // Recuperar datos del usuario
         }
+
         SharedPreferences preferences = getSharedPreferences("sesion", Context.MODE_PRIVATE);
-        if (preferences.getBoolean("estado_usu", false) == true) {
+        if (preferences.getBoolean("estado_usu", false)) {
             userId = preferences.getInt("idUsuario", -1);
-            recuperarUsuario(userId);
+            recuperarUsuario(userId); // Recuperar datos del usuario
         }
 
         navigationView.setItemIconTintList(null);
         navMenu = navigationView.getMenu();
         navController = Navigation.findNavController(this, R.id.navFragment);
         NavigationUI.setupWithNavController(navigationView, navController);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.CapturarPlaca) {
+        
+        navigationView.setNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.CapturarPlaca:
                     btnCamera.setVisibility(View.GONE);
                     navController.navigate(R.id.CapturarPlaca);
-                }
-                if (item.getItemId() == R.id.Reportes) {
+                    break;
+                case R.id.Reportes:
                     navController.navigate(R.id.Reportes);
-                }
-                if (item.getItemId() == R.id.Registros) {
+                    break;
+                case R.id.Registros:
                     navController.navigate(R.id.Registros);
-                }
-                if (item.getItemId() == R.id.Perfil) {
+                    break;
+                case R.id.Perfil:
                     navController.navigate(R.id.Perfil);
-                }
-                if (item.getItemId() == R.id.CerrarSesion) {
-                    cerrarSesion();
-                }
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-                return true;
+                    break;
+                case R.id.CerrarSesion:
+                    cerrarSesion(); // Cerrar sesión
+                    break;
+                default:
+                    break;
             }
-
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
         });
     }
 
+    /**
+     * Cierra la sesión del usuario y redirige a la pantalla de inicio de sesión.
+     */
     private void cerrarSesion() {
         SharedPreferences preferences = getSharedPreferences("sesion", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -102,20 +112,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.remove("idUsuario");
 
         editor.apply();
+        
         Intent intent = new Intent(this, LoginActivity.class);
-
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
 
         finish();
     }
 
+    /**
+     * Inicializa los componentes de la interfaz.
+     */
     private void inicializar() {
         navigationView = findViewById(R.id.NavigationView);
         headerView = navigationView.getHeaderView(0);
         tvnomuser = headerView.findViewById(R.id.tvNombreUsuario);
         btnCamera = findViewById(R.id.btnCamara);
-        navigationView = findViewById(R.id.NavigationView);
         drawerLayout = findViewById(R.id.drawerLayout1);
         btnMenu = findViewById(R.id.btnMenu);
 
@@ -125,38 +137,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btnMenu) {
-            drawerLayout.openDrawer(GravityCompat.START);
-            recuperarUsuario(userId);
-        }
-        if (v.getId() == R.id.btnCamara) {
-            navController.navigate(R.id.CapturarPlaca);
+        switch (v.getId()) {
+            case R.id.btnMenu:
+                drawerLayout.openDrawer(GravityCompat.START);
+                recuperarUsuario(userId); // Recuperar datos del usuario
+                break;
+            case R.id.btnCamara:
+                navController.navigate(R.id.CapturarPlaca);
+                break;
+            default:
+                break;
         }
     }
 
+    /**
+     * Recupera los datos del usuario desde el servidor.
+     * @param id ID del usuario.
+     */
     private void recuperarUsuario(int id) {
         ApiClient apiClient = new ApiClient();
         ApiUsuario apiUsuario = apiClient.getRetrofit().create(ApiUsuario.class);
         Call<Usuario> call = apiUsuario.obtenerUsuario(id);
+        
         call.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                try {
-                    if (response.isSuccessful()) {
-                        usuario = response.body();
-                        if (usuario != null) {
-                            String nombre = usuario.getPrimerApellido() + " " + usuario.getSegundoApellido() + " " + usuario.getNombres();
-                            if (usuario.getSegundoApellido().equals(""))
-                                nombre = usuario.getPrimerApellido() + " " + usuario.getNombres();
-                            tvnomuser.setText(nombre);
-                        } else {
-                            Log.e("Usuario", "nulo");
+                if (response.isSuccessful()) {
+                    usuario = response.body();
+                    if (usuario != null) {
+                        String nombre = usuario.getPrimerApellido() + " " + usuario.getSegundoApellido() + " " + usuario.getNombres();
+                        if (usuario.getSegundoApellido().isEmpty()) {
+                            nombre = usuario.getPrimerApellido() + " " + usuario.getNombres();
                         }
+                        tvnomuser.setText(nombre);
                     } else {
-                        Log.e("retrofitError", "" + response.errorBody());
+                        Log.e("Usuario", "nulo");
                     }
-                } catch (Exception e) {
-                    Log.e("Exception", e.getMessage() + "");
+                } else {
+                    Log.e("retrofitError", "" + response.errorBody());
                 }
             }
 
