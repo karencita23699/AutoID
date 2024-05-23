@@ -41,6 +41,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Fragmento de cámara que muestra la vista previa de la cámara y realiza el procesamiento de imágenes para la detección de objetos.
+ */
+
 public class CameraFragment extends Fragment implements View.OnClickListener {
     PreviewView previewView;
     EditText etPlaca;
@@ -66,6 +70,9 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
     }
 
+      /**
+     * Inicializa la vista del fragmento de la cámara.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -90,6 +97,9 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+     /**
+     * Inicializa los elementos de la interfaz de usuario y establece los listeners de los botones y la vista de imagen.
+     */
     private void inicializar() {
         previewView = view.findViewById(R.id.previewViewCamera);
         etPlaca = view.findViewById(R.id.etPlaca1);
@@ -122,7 +132,9 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
         imgZoomMenos.setOnClickListener(this);
         imgInfo.setOnClickListener(this);
     }
-
+     /**
+     * Normaliza la imagen capturada para tener un tamaño y orientación predefinidos.
+     */
     private Bitmap normalizar(Bitmap image) {
         Matrix matrix = new Matrix();
         matrix.postRotate(90);
@@ -132,7 +144,9 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
 
         return imgnormalizada;
     }
-
+      /**
+     * Realiza la predicción de objetos en la imagen capturada y muestra el resultado en la vista.
+     */
     private void predecir(ImageProcessor im, Bitmap img) {
         requireActivity().runOnUiThread(new Runnable() {
             @Override
@@ -169,6 +183,9 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
             }
         });
     }
+     /**
+     * Calcula las coordenadas de una caja delimitadora alrededor de un objeto detectado en la imagen.
+     */
 
     private Caja Localizacion(Detection det) {
         float x_center = det.getBoundingBox().getX() * previewView.getWidth();
@@ -184,7 +201,10 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
         Caja caja = new Caja(x_min, y_min, x_max, y_max);
         return caja;
     }
-
+    
+    /**
+     * Actualiza el adaptador de la vista de lista que muestra las predicciones realizadas en la imagen.
+     */
     private void actualizarAdapter() {
         etPlaca.setText(prediccion);
         adapterPredicciones = new AdapterPredicciones(getActivity(), listAdapter);
@@ -192,7 +212,9 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
         adapterPredicciones.notifyDataSetChanged();
     }
 
-
+        /**
+     * Maneja los eventos de clic en los botones y la vista de imagen.
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnIncorrecto)
@@ -214,7 +236,9 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
             if (!prediccion.equals(""))
                 actualizarAdapter();
     }
-
+     /**
+     * Envía un informe al servidor si se detecta una placa incorrecta en la imagen capturada.
+     */
     private void Reportar() {
         if (!prediccion.equals("")) {
 
@@ -246,7 +270,9 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
         } else
             Toast.makeText(getContext(), "No se capturo ninguna placa", Toast.LENGTH_SHORT).show();
     }
-
+       /**
+     * Convierte un bitmap en una cadena de texto codificada en base64.
+     */
     public String getStringImage(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
@@ -254,7 +280,9 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
     }
-
+     /**
+     * Registra una placa si se detecta una placa válida en la imagen capturada.
+     */
     private void RegistrarPlaca() {
         if (!prediccion.equals("")) {
             ApiClient apiClient = new ApiClient();
@@ -284,8 +312,10 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
             });
 
         }
-    }
-
+    }    
+      /**
+     * Libera los recursos de la cámara cuando se destruye la vista del fragmento de la cámara.
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
