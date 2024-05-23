@@ -19,24 +19,36 @@ import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * La clase ImageProcessor se encarga de procesar imágenes usando un modelo de aprendizaje automático para detectar
+ * ciertos objetos en la imagen. Utiliza TensorFlow Lite para la inferencia del modelo y realiza un post-procesamiento
+ * para obtener las detecciones finales.
+ */
 public class ImageProcessor {
-    private Context context;
-    private static final int INPUT_SIZE = 640;
+    private Context context; // Contexto de la aplicación
+    private static final int INPUT_SIZE = 640; // Tamaño de la imagen de entrada (640x640)
 
-    private LastFp161 model;
-    private Float nmsConfidence = 0.5f;
+    private LastFp161 model; // Instancia del modelo LastFp161
+    private Float nmsConfidence = 0.5f; // Umbral de confianza para la supresión de no-máximos (NMS)
 
-    private final int[] OUTPUT_SIZE = new int[]{1, 25200, 85};
+    private final int[] OUTPUT_SIZE = new int[]{1, 25200, 85}; // Tamaño de la salida del modelo
     private String[] labels = new String[]{
-            "1","2","3","4","5","6","7","8","9","0","A","B","C","D","E","F","G","H","I","J","K",
-            "L","M","N","O","P","Q","R","S","T","U","W","X","Y","Z","Placa"
-    };
+        "1","2","3","4","5","6","7","8","9","0","A","B","C","D","E","F","G","H","I","J","K",
+        "L","M","N","O","P","Q","R","S","T","U","W","X","Y","Z","Placa"
+    }; // Array de etiquetas que corresponden a las clases que el modelo puede detectar
 
+    /**
+     * Constructor de ImageProcessor. Inicializa el ImageProcessor y el modelo de TensorFlow Lite.
+     * @param context Contexto de la aplicación.
+     */
     public ImageProcessor(Context context) {
         this.context = context;
         initializeModel();
     }
 
+    /**
+     * Inicializa el modelo de TensorFlow Lite. Si ocurre un error, muestra un mensaje Toast.
+     */
     private void initializeModel() {
         try {
             model = LastFp161.newInstance(context);
@@ -46,6 +58,14 @@ public class ImageProcessor {
         }
     }
 
+    /**
+     * Procesa una imagen y devuelve una lista de detecciones.
+     * @param bitmap Imagen a procesar.
+     * @param context Contexto de la aplicación.
+     * @param confidenceThreshold Umbral de confianza para considerar una detección válida.
+     * @return Lista de detecciones (List<Detection>).
+     * @throws IOException Puede lanzar IOException.
+     */
     public List<Detection> processImage(Bitmap bitmap, Context context, float confidenceThreshold) throws IOException {
         List<Detection> Ldet = new ArrayList<>();
         TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 640, 640, 3}, DataType.FLOAT32);
@@ -55,24 +75,24 @@ public class ImageProcessor {
 
         float[] salida = outputFeature0.getFloatArray();
         int[] outputShape = outputFeature0.getShape();
-        int numclasses=36;
+        int numclasses = 36;
 
         float[][] outputVectorFlat = new float[outputShape[1]][outputShape[2]];
-        int index = 0, k=0;
+        int index = 0, k = 0;
         for (int i = 0; i < outputShape[1]; i++) {
             int ind = index;
             for (int j = 0; j < outputShape[2]; j++) {
-                if(salida[ind+4]>confidenceThreshold){
-                    outputVectorFlat[k][j]=salida[index++];
-                    if(j==outputShape[2]-1)
+                if (salida[ind + 4] > confidenceThreshold) {
+                    outputVectorFlat[k][j] = salida[index++];
+                    if (j == outputShape[2] - 1)
                         k++;
-                }else{
-                    index+=outputShape[2];
-                    j=outputShape[2];
+                } else {
+                    index += outputShape[2];
+                    j = outputShape[2];
                 }
             }
         }
-        for (int i = 0; i <k; i++) {
+        for (int i = 0; i < k; i++) {
             float presicion = outputVectorFlat[i][4];
             if (presicion > confidenceThreshold) {
                 BoundingBox caja = new BoundingBox();
@@ -83,12 +103,11 @@ public class ImageProcessor {
                 Detection det = new Detection();
                 det.setBoundingBox(caja);
                 det.setConfidence(outputVectorFlat[i][4]);
-                for(int j=5;j<(numclasses+5);j++){
-                    if(outputVectorFlat[i][j]>0.75f)
-                    {
+                for (int j = 5; j < (numclasses + 5); j++) {
+                    if (outputVectorFlat[i][j] > 0.75f) {
                         det.setPresicion(outputVectorFlat[i][j]);
-                        det.setClassIndex(j-5);
-                        det.setClase(labels[(j-5)]);
+                        det.setClassIndex(j - 5);
+                        det.setClase(labels[(j - 5)]);
                         Ldet.add(det);
                     }
                 }
@@ -99,7 +118,11 @@ public class ImageProcessor {
         return Ldet;
     }
 
-
+    /**
+     * Convierte una imagen Bitmap a un ByteBuffer compatible con el modelo de TensorFlow Lite.
+     * @param bitmap Imagen a convertir.
+     * @return ByteBuffer que representa la imagen.
+     */
     protected ByteBuffer convertBitmapToByteBuffer(Bitmap bitmap) {
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * 1 * INPUT_SIZE * INPUT_SIZE * 3);
         byteBuffer.order(ByteOrder.nativeOrder());
@@ -116,6 +139,4 @@ public class ImageProcessor {
         }
         return byteBuffer;
     }
-
-
 }
